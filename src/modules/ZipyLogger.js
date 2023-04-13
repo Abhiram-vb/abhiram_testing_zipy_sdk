@@ -1,3 +1,5 @@
+import {setData} from './SqlHandling';
+
 export const logMessage = (
   message,
   jsonArg = null,
@@ -28,10 +30,11 @@ export const logMessage = (
   console.log(logMessage);
 
   const logData = {
-    timestamp: Date.now(),
+    timestamp: new Date().toJSON(),
     message: message,
     jsonContent: jsonString,
   };
+  setData(logData.timestamp, logData.message, logData.jsonContent);
   console.log(logData, 'this is the log data');
 
   // Here we need to write a code to send logData to backend through a specific event.
@@ -50,10 +53,12 @@ export const logException = (message, exceptionObject, maxLength = 75) => {
   console.error(message, exceptionObject);
 
   const logData = {
-    timestamp: Date.now(),
+    timestamp: new Date().toJSON(),
     message: msg,
     stackTrace: stackTrace,
   };
+  // console.log();
+  setData(logData.timestamp, logData.message, logData.stackTrace);
   console.log(logData, 'this is the logdata of the logexception');
   //Here we need to write a code to send logData to backend through a specific event.
 };

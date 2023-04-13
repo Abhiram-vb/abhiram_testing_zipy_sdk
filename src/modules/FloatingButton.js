@@ -2,22 +2,30 @@ import {Alert} from 'react-native';
 
 import {FAB} from 'react-native-elements';
 import React from 'react';
+import {deleteData, getData} from './SqlHandling';
 
 const FloatingButton = () => {
   const thisisclicked = () => {
     console.log('this is clicked');
+
     Alert.alert(
       'Do you want to report any bug',
-      'You clicked floating action button',
+      'You clicked floating action button you can do below actions',
       [
         {
-          text: 'ok',
+          text: 'Get Data',
           onPress: () => {
-            console.log('ok is clicked');
+            getData();
           },
         },
         {
-          text: 'cancle',
+          text: 'Drop Table',
+          onPress: () => {
+            deleteData();
+          },
+        },
+        {
+          text: 'Cancle',
           onPress: () => {
             console.log('cancle is clicked');
           },
