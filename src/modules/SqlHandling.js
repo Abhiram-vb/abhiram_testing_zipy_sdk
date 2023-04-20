@@ -1,10 +1,12 @@
 import {useEffect} from 'react';
 import {openDatabase} from 'react-native-sqlite-storage';
-
-const db = openDatabase({
-  name: 'zipy',
-});
+// const db = openDatabase({
+//   name: 'zipy',
+// });
 export const setData = async (time, message, jsonContent) => {
+  const db = openDatabase({
+    name: 'zipy',
+  });
   await db.transaction(async tx => {
     await tx.executeSql(
       'INSERT INTO USERS (DateTime, Message,JsonContent) VALUES (?,?,?)',
@@ -20,6 +22,9 @@ export const setData = async (time, message, jsonContent) => {
 };
 
 export const createTable = () => {
+  const db = openDatabase({
+    name: 'zipy',
+  });
   db.transaction(tx => {
     tx.executeSql(
       'CREATE TABLE IF NOT EXISTS' +
@@ -35,9 +40,11 @@ export const createTable = () => {
     );
   });
 };
-useEffect(createTable, []);
 
 export const getData = async () => {
+  const db = openDatabase({
+    name: 'zipy',
+  });
   await db.transaction(async tx => {
     await tx.executeSql(
       'SELECT * from USERS',
@@ -69,6 +76,9 @@ export const getData = async () => {
 };
 
 export const deleteData = async () => {
+  const db = openDatabase({
+    name: 'zipy',
+  });
   await db.transaction(async tx => {
     await tx.executeSql(
       'DROP TABLE USERS',
